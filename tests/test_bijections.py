@@ -12,7 +12,8 @@ cortez = Person('cortez', 'joacoco@primavera.com')
 joacoto = Person('pototo', 'pototo@primavera.com')
 julian = Person('julan', 'julian@primavera.com')
 
-persons_list = [padrino, berka, franlu, negro, santiju, gibran, cortez, joacoto, julian]
+persons_list = [padrino, berka, franlu, negro, santiju, gibran,
+                cortez, joacoto, julian]
 
 
 def update_checked_people_dict(d: dict, name: str, column: str):
@@ -21,7 +22,9 @@ def update_checked_people_dict(d: dict, name: str, column: str):
     else:
         d[name] = {"left_column": False, "right_column": False}
 
+
 bijection = make_bijections(persons_list)
+
 
 def test_none_left_behind():
     checked_people = {}
@@ -31,6 +34,7 @@ def test_none_left_behind():
 
     assert len(checked_people.keys()) == len(persons_list)
     assert any(checked_people.values())
+
 
 def test_bijections():
     equals = False
