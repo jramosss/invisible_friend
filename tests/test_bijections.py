@@ -10,7 +10,7 @@ santiju = Person('Santiju', 'santiju@primavera.com')
 gibran = Person('Gibran', 'gibran@primavera.com')
 cortez = Person('cortez', 'joacoco@primavera.com')
 joacoto = Person('pototo', 'pototo@primavera.com')
-julian = Person('julan', 'julian@primavera.com')
+julian = Person('julian', 'julian@primavera.com')
 
 persons_list = [padrino, berka, franlu, negro, santiju, gibran,
                 cortez, joacoto, julian]
@@ -43,5 +43,5 @@ def test_bijections():
             equals = True
             break
 
-    assert not equals
     print(bijection)
+    assert not equals
