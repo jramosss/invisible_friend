@@ -9,10 +9,8 @@
     <div>
         {% for group in groups %}
             <li>
-                <a href="{{ group.url }}">{{ group.name }}</a>
-                <p>ID: {{group.id}}</p>
-                <p>Name: {{group.name}}</p>
-                <p>Email: {{group.email}}</p>
+                <ul>ID: {{group.id}}</ul>
+                <ul>Name: {{group.name}}</ul>
             </li>
         {% endfor %}
     </div>
@@ -20,9 +18,9 @@
     <div>
         {% for user in users %}
             <li>
-                <p>ID: {{user.id}}</p>
-                <p>Name: {{user.name}}</p>
-                <p>Email: {{user.email}}</p>
+                <ul>ID: {{user.id}}</ul>
+                <ul>Name: {{user.name}}</ul>
+                <ul>Email: {{user.email}}</ul>
             </li>
         {% endfor %}
     </div>
