@@ -24,13 +24,28 @@ def create():
     return render_template("group_create.html")
 
 
+@groups.route('/edit/<int:group_id>', methods=["GET", 'POST'])
+def edit(group_id: int):
+    group = Group.query.get_or_404(group_id)
+    if request.method == "POST":
+        new_user_name = request.form['user_name']
+        new_user_email = request.form['user_email']
+        if new_user_email in [user.email for user in group.people]:
+            abort(400, "Email already in group")
+        new_user = Person(name=new_user_name, email=new_user_email, group=group)
+        db.session.add(new_user)
+        db.session.commit()
+        group = Group.query.get_or_404(group_id)
+    return render_template("group.html", group=group)
+
+
 @groups.route('/register', methods=["GET", "POST"])
 def add_to_group():
     if request.method == "POST":
         name = request.form['name']
         email = request.form['email']
         group_id = request.form['group_id']
-        if not Group.query.filter_by(id=group_id).exists():
+        if not Group.query.filter_by(group_id).exists():
             abort(500)
         if not name:
             return '<p>Please enter a name</p>'
