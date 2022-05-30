@@ -7,11 +7,11 @@
 {% block body %}
     <h1>Groups</h1>
     <div>
-        {% for group_name, members in groups.items() %}
-            <li> <b>{{group_name}}</b>
+        {% for group in groups %}
+            <li> <b>{{group.name}}</b>
                 <ul>
-                    {% for member in members %}
-                        <p>{{member.id}}: {{member.name}} - {{member.email}}</p>
+                    {% for member in group.members %}
+                        <p>{{member.person.id}}: {{member.person.name}} - {{member.person.email}}</p>
                     {% endfor %}
                 </ul>
             </li>
