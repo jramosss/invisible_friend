@@ -1,3 +1,5 @@
+from datetime import datetime
+from pprint import pprint
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
@@ -10,7 +12,17 @@ db = SQLAlchemy(app)
 
 
 def init_db():
-    from resources.groups.models import Group, Person
+    from resources.groups.models import Group, Person, Profile
+    @app.shell_context_processor
+    def shell_context():
+        return {
+            'db': db,
+            'Group': Group,
+            'Person': Person,
+            'Profile': Profile,
+            'pprint': pprint,
+            'datetime': datetime
+        }
     db.create_all()
     db.session.commit()
 

@@ -6,16 +6,14 @@ class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False)
-    group_id = db.Column(db.Integer, db.ForeignKey('group.id'), nullable=False)
-    group = db.relationship('Group', backref=db.backref('people', lazy=True))
 
     def __repr__(self):
-        return f"Person('{self.name}', '{self.email}', '{self.group_id}')"
+        return f"Person {self.name}, {self.email}"
 
 
 class Group(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
+    name = db.Column(db.String(50), nullable=False)
     created_at = db.Column(
         db.DateTime,
         nullable=False,
@@ -23,4 +21,17 @@ class Group(db.Model):
     )
 
     def __repr__(self):
-        return f"Group('{self.name}'')"
+        return f"Group('{self.name}')"
+
+
+class Profile(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    person_id = db.Column(db.Integer, db.ForeignKey("person.id"))
+    person = db.relationship("Person", backref="profiles")
+    group_id = db.Column(db.Integer, db.ForeignKey("group.id"))
+    group = db.relationship("Group", backref="members")
+
+    __table_args__ = (db.UniqueConstraint('person_id', 'group_id'), )
+
+    def __repr__(self):
+        return f"Profile {self.person.name} - {self.group.name}"
