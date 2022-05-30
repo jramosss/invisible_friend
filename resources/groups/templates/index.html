@@ -7,22 +7,13 @@
 {% block body %}
     <h1>Groups</h1>
     <div>
-        {% for group in groups %}
-            <li>
-                <a href="{{ group.url }}">{{ group.name }}</a>
-                <p>ID: {{group.id}}</p>
-                <p>Name: {{group.name}}</p>
-                <p>Email: {{group.email}}</p>
-            </li>
-        {% endfor %}
-    </div>
-    <h1>Users</h1>
-    <div>
-        {% for user in users %}
-            <li>
-                <p>ID: {{user.id}}</p>
-                <p>Name: {{user.name}}</p>
-                <p>Email: {{user.email}}</p>
+        {% for group_name, members in groups.items() %}
+            <li> <b>{{group_name}}</b>
+                <ul>
+                    {% for member in members %}
+                        <p>{{member.id}}: {{member.name}} - {{member.email}}</p>
+                    {% endfor %}
+                </ul>
             </li>
         {% endfor %}
     </div>

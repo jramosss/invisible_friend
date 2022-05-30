@@ -1,6 +1,7 @@
 from flask import redirect, render_template, request, url_for, Blueprint, abort
 from app import db
-from .models import Group, Person
+from resources.groups.utils import get_groups
+from .models import Group, Person, Profile
 
 groups = Blueprint('groups', __name__,
                    template_folder='templates', url_prefix='/groups')
@@ -8,11 +9,9 @@ groups = Blueprint('groups', __name__,
 
 @groups.route('/')
 def index():
-    print(Group)
-    groups = Group.query.all()
-    users = Person.query.all()
+    groups = get_groups()
     print(groups)
-    return render_template('index.html', groups=groups, users=users)
+    return render_template('index.html', groups=groups)
 
 
 @groups.route('/register/', methods=['POST'])
@@ -26,7 +25,9 @@ def add_to_group():
         return '<p>Please enter a name</p>'
     if not email:
         return '<p>Please enter an email</p>'
-    new_person = Person(name=name, email=email, group_id=group_id)
-    db.session.add(new_person)
+    person = Person.query.filter_by(email=email).first()
+    group = Group.query.filter_by(group_id=group_id).first()
+    new_profile = Profile(person=person, group=group)
+    db.session.add(new_profile)
     db.session.commit()
     return redirect(url_for("groups.register"))
