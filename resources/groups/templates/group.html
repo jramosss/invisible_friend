@@ -12,10 +12,10 @@
   <div>
     <h2>Group Members</h2>
     <ul>
-      {% for member in group.people %}
+      {% for member in group.members %}
         <li>
-            <ul>{{member.name}}</ul>
-            <ul>{{member.email}}</ul>
+            <ul>{{member.person.name}}</ul>
+            <ul>{{member.person.email}}</ul>
         </li>
       {% endfor %}
     </ul>
