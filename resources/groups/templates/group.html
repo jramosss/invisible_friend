@@ -1,0 +1,45 @@
+<!doctype html>
+<title>{% block title %}{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<nav>
+  <h1>{{group.name}}'s Group</h1>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% block content %}
+  <div>
+    <h2>Group Members</h2>
+    <ul>
+      {% for member in group.people %}
+        <li>
+            <ul>{{member.name}}</ul>
+            <ul>{{member.email}}</ul>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div>
+      <button id="show-div-button" value="Add Participant">Add Participant</button>
+      <div id="add-participant-div" style="display: none;">
+          <form method="post">
+            <label for="name">Name</label>
+            <input name="user_name" id="name" required>
+            <label for="email">Email</label>
+            <input name="user_email" id="email" required>
+            <input type="submit" value="Add to group">
+          </form>
+      </div>
+      <script>
+        let button = document.getElementById("show-div-button");
+        button.addEventListener("click", function() {
+            let div = document.getElementById("add-participant-div");
+            div.style.display = div.style.display != "block" ? "block" : "none";
+            button.value = button.value == "Add Participant" ? "Cancel" : "Add Participant";
+            button.innerHTML = button.innerHTML == "Add Participant" ? "Cancel" : "Add Participant";
+        });
+      </script>
+  </div>
+  {% endblock %}
+</section>
