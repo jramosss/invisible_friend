@@ -1,5 +1,7 @@
 from datetime import datetime
+from os import getenv
 from pprint import pprint
+
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
@@ -7,6 +9,12 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USERNAME'] = getenv("MAIL_USERNAME")
+app.config['MAIL_PASSWORD'] = getenv("MAIL_PASSWORD")
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
 
 db = SQLAlchemy(app)
 

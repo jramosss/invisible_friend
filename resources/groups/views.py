@@ -1,7 +1,9 @@
 from app import db
 from flask import Blueprint, abort, redirect, render_template, request, url_for
 
-from .models import Group, Person, Profile
+from .models import Group, Profile
+from src.person import Person
+from src.tuples import make_bijections
 
 groups = Blueprint('groups', __name__,
                    template_folder='templates', url_prefix='/groups')
@@ -56,3 +58,11 @@ def remove_participant(profile_id: int):
     db.session.delete(profile)
     db.session.commit()
     return redirect(url_for('groups.update', group_id=group_id))
+
+
+@groups.route('/send_mails/<int:group_id>', methods=['POST'])
+def send_mails(group_id: int):
+    group = Group.query.get_or_404(group_id)
+    people = [Person(m.name, m.email) for m in group.members]
+    bijection = make_bijections(people)
+    return redirect(url_for('groups.view'))
