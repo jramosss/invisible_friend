@@ -1,8 +1,8 @@
 <!doctype html>
 <title>{% block title %}{% endblock %}</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/group.css') }}">
 <nav>
-  <h1>{{group.name}}'s Group</h1>
+  <h1 class="main-title">{{group.name}}'s Group</h1>
 </nav>
 <section class="content">
   <header>
@@ -10,17 +10,20 @@
   </header>
   {% block content %}
   <div>
-    <h2>Group Members</h2>
     <ul>
       {% for member in group.members %}
         <li>
-            <ul>{{member.person.name}}</ul>
-            <ul>{{member.person.email}}</ul>
+            <p>{{member.person.name}} - {{member.person.email}}</p>
+            <div id="remove-participant-div" class="remove-participant-div">
+              <form action="/groups/remove_participant/{{member.id}}" method="post">
+                <button name="remove-member-btn" type="submit">Remove Participant</button>
+              </form>
+            </div>
         </li>
       {% endfor %}
     </ul>
   </div>
-  <div id="main-div">
+  <div id="main-div" class="main-div">
       <button id="show-div-button" value="Add Participant">Add Participant</button>
       <div id="add-participant-div" style="display: none;">
           <form action="/groups/{{group.id}}" method="post">
@@ -31,15 +34,14 @@
             <input type="submit" value="Add to group">
           </form>
       </div>
-      <div id="remove-participant-div">
-
-      </div>
       <div id="delete-group-div">
         <form action="/groups/delete/{{group.id}}" method="post">
           <button name="delete-group-btn" type="submit">Delete Group</button>
         </form>
       </div>
-      <!--TODO button to return to index-->
+      <div id="return">
+        <a href="/groups">Back to Groups</a>
+      </div>
       <script>
         let button = document.getElementById("show-div-button");
         button.addEventListener("click", function() {

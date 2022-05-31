@@ -40,9 +40,19 @@ def view():
     groups = Group.query.all()
     return render_template('index.html', groups=groups)
 
+
 @groups.route('/delete/<int:group_id>', methods=['POST'])
 def delete_group(group_id: int):
     group = Group.query.get_or_404(group_id)
     db.session.delete(group)
     db.session.commit()
     return redirect(url_for('groups.view'))
+
+
+@groups.route('/remove_participant/<int:profile_id>', methods=['POST'])
+def remove_participant(profile_id: int):
+    profile = Profile.query.get_or_404(profile_id)
+    group_id = profile.group.id
+    db.session.delete(profile)
+    db.session.commit()
+    return redirect(url_for('groups.update', group_id=group_id))
