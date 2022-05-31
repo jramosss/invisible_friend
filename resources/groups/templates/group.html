@@ -20,16 +20,24 @@
       {% endfor %}
     </ul>
   </div>
-  <div>
+  <div id="main-div">
       <button id="show-div-button" value="Add Participant">Add Participant</button>
       <div id="add-participant-div" style="display: none;">
-          <form method="post">
+          <form action="/groups/{{group.id}}" method="post">
             <label for="name">Name</label>
             <input name="user_name" id="name" required>
             <label for="email">Email</label>
             <input name="user_email" id="email" required>
             <input type="submit" value="Add to group">
           </form>
+      </div>
+      <div id="remove-participant-div">
+
+      </div>
+      <div id="delete-group-div">
+        <form action="/groups/delete/{{group.id}}" method="post">
+          <button name="delete-group-btn" type="submit">Delete Group</button>
+        </form>
       </div>
       <!--TODO button to return to index-->
       <script>
