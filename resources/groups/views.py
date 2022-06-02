@@ -1,7 +1,6 @@
-from app import db
 from flask import Blueprint, abort, redirect, render_template, request, url_for
 
-from .models import Group, Profile
+from .models import Group, Profile, db
 from src.person import Person
 from src.tuples import make_bijections
 
