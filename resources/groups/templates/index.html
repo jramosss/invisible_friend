@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Groups</title>
+{% endblock %}
+    
+{% block body %}
+    <h1>Groups</h1>
+    <div>
+        {% for group in groups %}
+            <li> <b>{{group.name}}</b>
+                <ul>
+                    {% for member in group.members %}
+                        <p>{{member.person.id}}: {{member.person.name}} - {{member.person.email}}</p>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </div>
+{% endblock %}
