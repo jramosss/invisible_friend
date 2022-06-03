@@ -1,7 +1,9 @@
-from app import db
 from flask import Blueprint, abort, redirect, render_template, request, url_for
+from resources.groups.utils import send_group_mails
+from src.person import Person
+from src.tuples import make_bijections
 
-from .models import Group, Person, Profile
+from .models import Group, Profile, db
 
 groups = Blueprint('groups', __name__,
                    template_folder='templates', url_prefix='/groups')
@@ -56,3 +58,25 @@ def remove_participant(profile_id: int):
     db.session.delete(profile)
     db.session.commit()
     return redirect(url_for('groups.update', group_id=group_id))
+
+
+@groups.route('/edit_participant/<int:profile_id>', methods=['POST'])
+def edit_participant(profile_id: int):
+    profile = Profile.query.get_or_404(profile_id)
+    group_id = profile.group.id
+    new_user_name = request.form.get('new_user_name', None)
+    new_user_email = request.form.get('new_user_email', None)
+    if new_user_name:
+        profile.person.name = new_user_name
+    if new_user_email:
+        profile.person.email = new_user_email
+    db.session.commit()
+    return redirect(url_for('groups.update', group_id=group_id))
+
+@groups.route('/send_mails/<int:group_id>', methods=['POST'])
+def send_mails(group_id: int):
+    group = Group.query.get_or_404(group_id)
+    people = [m.person for m in group.members]
+    bijection = make_bijections(people)
+    send_group_mails(bijection)
+    return redirect(url_for('groups.view'))

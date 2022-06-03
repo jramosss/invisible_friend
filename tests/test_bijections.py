@@ -43,5 +43,4 @@ def test_bijections():
             equals = True
             break
 
-    print(bijection)
     assert not equals
