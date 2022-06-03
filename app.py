@@ -7,11 +7,6 @@ from flask import Flask, current_app
 from resources.groups.models import Group, Person, Profile
 
 
-def init_db(db):
-    db.create_all()
-    db.session.commit()
-
-
 def create_app():
     app = Flask(__name__)
     app.config.update({
@@ -26,10 +21,7 @@ def create_app():
     })
     from resources.groups.models import db
 
-    print("Creating database...")
     db.init_app(app)
-    print("DB initialized")
-    # init_db(db)
     with app.app_context():
         @app.shell_context_processor
         def shell_context():
@@ -44,5 +36,6 @@ def create_app():
         def register_blueprints():
             from resources.groups.views import groups
             current_app.register_blueprint(groups, template_folder="templates/")
+        register_blueprints()
 
     return app
