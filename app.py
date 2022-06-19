@@ -18,6 +18,7 @@ def create_app():
         'MAIL_PASSWORD': getenv("MAIL_PASSWORD"),
         'MAIL_USE_TLS': True,
         'MAIL_USE_SSL': False,
+        'TEMPLATES_AUTO_RELOAD': True,
     })
     from resources.groups.models import db
 

@@ -1,0 +1,23 @@
+.body-div {
+  display: flex;
+  justify-content: center;
+}
+
+.title-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.main-title {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.group-name-input {
+  border-color: blue;
+  border-radius: 7%;
+  border-width: 10%;
+}
