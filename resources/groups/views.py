@@ -5,8 +5,11 @@ from src.tuples import make_bijections
 
 from .models import Group, Profile, db
 
-groups = Blueprint('groups', __name__,
-                   template_folder='templates', url_prefix='/groups')
+groups = Blueprint(
+    'groups', __name__,
+    template_folder='templates',
+    url_prefix='/groups'
+)
 
 
 @groups.route('/create', methods=["GET", 'POST'])

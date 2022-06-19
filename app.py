@@ -38,4 +38,8 @@ def create_app():
             current_app.register_blueprint(groups, template_folder="templates/")
         register_blueprints()
 
+    @app.route("/")
+    def index():
+        return {"URL's": [rule.endpoint for rule in app.url_map.iter_rules()]}
+
     return app
