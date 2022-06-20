@@ -26,31 +26,33 @@
 <hr/>
 <section class="content">
   {% block content %}
-  <div>
-    <ul>
-      {% for member in group.members %}
-        <li>
-            <p>{{member.person.name}} - {{member.person.email}}</p>
-            <div id="remove-participant-div" class="remove-participant-div">
-              <form action="/groups/remove_participant/{{member.id}}" method="post">
-                <button name="remove-member-btn" type="submit">Remove Participant</button>
-              </form>
-            </div>
-            <div>
-              <button id={{member.person.name}} name="show-edit-participant-div-button" value="Add Participant">Edit Participant</button>
-              <div id={{member.person.name}} name="edit-participant-div" style="display: none;">
-                <form action="/groups/edit_participant/{{group.id}}" method="post">
-                  <label for="name">Name</label>
-                  <input name="new_user_name" id="name" required>
-                  <label for="email">Email</label>
-                  <input name="new_user_email" id="email" required>
-                  <input type="submit" value="Edit participant">
-                </form>
-              </div>
-            </div>
-        </li>
-      {% endfor %}
-    </ul>
+  <ul>
+    {% for member in group.members %}
+    <li>
+      <div class="participant-div">
+        <div class="participant-info-div">
+          <p>{{member.person.name}} - {{member.person.email}}</p>
+        </div>
+        <div class="remove-participant-div">
+          <form action="/groups/remove_participant/{{member.id}}" method="post">
+            <input id="remove-participant-button" type="image" src="/static/images/trash.png"/>
+          </form>
+        </div>
+        <div class="edit-participant-div">
+          <input id="show-edit-participant-button" name="show-edit-participant-button" type="image" src="/static/images/pencil.png"/>
+          <div id={{member.person.name}} name="edit-participant-div" style="display: none;">
+            <form action="/groups/edit_participant/{{group.id}}" method="post">
+              <label for="name">Name</label>
+              <input name="new_user_name" id="name" required>
+              <label for="email">Email</label>
+              <input name="new_user_email" id="email" required>
+              <input type="submit" value="Edit participant">
+            </form>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
   </div>
   <div id="main-div" class="main-div">
       <div id="add-participant-div" style="display: none;">
@@ -69,7 +71,7 @@
             div.style.display = div.style.display != "block" ? "block" : "none";
             add_participant_button.value = add_participant_button.value == "Add Participant" ? "Cancel" : "Add Participant";
         });
-        let edit_participant_buttons = document.getElementsByName("show-edit-participant-div-button");
+        let edit_participant_buttons = document.getElementsByName("show-edit-participant-button");
         for (const edit_participant_button of edit_participant_buttons){
           edit_participant_button.addEventListener("click", function() {
               let div = edit_participant_button.parentElement.children[1];

@@ -84,3 +84,35 @@ nav {
     height: auto;
     alt: "Return to group list";
 }
+
+.participant-div {
+    width: 100%;
+    height: 10vh;
+}
+
+.participant-info-div {
+    float: left;
+}
+
+.remove-participant-div {
+    width: 3vh;
+    height: 3vh;
+    float: left;
+}
+
+#remove-participant-button {
+    max-width: 100%; 
+    alt: "Remove Participant";
+}
+
+.edit-participant-div {
+    width: 3vh;
+    height: 3vh;
+    margin-left: 3vh;
+    float: left;
+}
+
+#show-edit-participant-button {
+    max-width: 100%; 
+    alt: "Edit Participant";
+}
