@@ -13,7 +13,7 @@
 <div class="show-add-participant-div">
   <input type="image" id="show-add-participant-button" src="/static/images/plus-sign.png"/>
 </div>
-<div class="delete-group-div">
+<div class="delete-group-div")">
   <form action="/groups/delete/{{group.id}}" method="post">
     <input id="delete-group-button" type="image" src="/static/images/trash.png"/>
   </form>
@@ -31,7 +31,7 @@
     <li>
       <div class="participant-div">
         <div class="participant-info-div">
-          <p>{{member.person.name}} - {{member.person.email}}</p>
+          <p style="font-size: 3vh;">{{member.person.name}} - {{member.person.email}}</p>
         </div>
         <div class="remove-participant-div">
           <form action="/groups/remove_participant/{{member.id}}" method="post">
