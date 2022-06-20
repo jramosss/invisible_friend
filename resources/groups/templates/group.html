@@ -1,9 +1,9 @@
 <!doctype html>
 <title>{{group.name}}'s Group</title>
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/group.css') }}">
+<link rel= "stylesheet" href= "{{ url_for('static',filename='styles/group.css') }}">
 <title>{{group.name}}'s Group</title>
 <nav>
-  <h1 class="main-title">{{group.name}}'s Group</h1>
+  <h1>{{group.name}}'s Group</h1>
 </nav>
 <div class="return-div">
   <a href="/groups">
@@ -53,34 +53,15 @@
       </li>
     {% endfor %}
   </ul>
+  <div id="add-participant-div" style="display: none;">
+      <form action="/groups/{{group.id}}" method="post">
+        <label for="name">Name</label>
+        <input name="user_name" id="name" required>
+        <label for="email">Email</label>
+        <input name="user_email" id="email" required>
+        <input type="submit" value="Add to group">
+      </form>
   </div>
-  <div id="main-div" class="main-div">
-      <div id="add-participant-div" style="display: none;">
-          <form action="/groups/{{group.id}}" method="post">
-            <label for="name">Name</label>
-            <input name="user_name" id="name" required>
-            <label for="email">Email</label>
-            <input name="user_email" id="email" required>
-            <input type="submit" value="Add to group">
-          </form>
-      </div>
-      <script>
-        let add_participant_button = document.getElementById("show-add-participant-button");
-        add_participant_button.addEventListener("click", function() {
-            let div = document.getElementById("add-participant-div");
-            div.style.display = div.style.display != "block" ? "block" : "none";
-            add_participant_button.value = add_participant_button.value == "Add Participant" ? "Cancel" : "Add Participant";
-        });
-        let edit_participant_buttons = document.getElementsByName("show-edit-participant-button");
-        for (const edit_participant_button of edit_participant_buttons){
-          edit_participant_button.addEventListener("click", function() {
-              let div = edit_participant_button.parentElement.children[1];
-              div.style.display = div.style.display != "block" ? "block" : "none";
-              edit_participant_button.value = edit_participant_button.value == "Edit Participant" ? "Cancel" : "Edit Participant";
-              edit_participant_button.innerHTML = edit_participant_button.innerHTML == "Edit Participant" ? "Cancel" : "Edit Participant";
-          });
-        }
-      </script>
-  </div>
+  <script src="/static/functions/group.js"/>
   {% endblock %}
 </section>
