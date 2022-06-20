@@ -6,7 +6,9 @@
   <h1 class="main-title">{{group.name}}'s Group</h1>
 </nav>
 <div class="return-div">
-  <input id="return-button" type="image" src="/static/images/back.png" href="/groups"/>
+  <a href="/groups">
+    <input id="return-button" type="image" src="/static/images/back.png"/>
+  </a>
 </div>
 <div class="show-add-participant-div">
   <input type="image" id="show-add-participant-button" src="/static/images/plus-sign.png"/>
@@ -65,8 +67,7 @@
         add_participant_button.addEventListener("click", function() {
             let div = document.getElementById("add-participant-div");
             div.style.display = div.style.display != "block" ? "block" : "none";
-            add_participant_button.value = button.value == "Add Participant" ? "Cancel" : "Add Participant";
-            add_participant_button.innerHTML = button.innerHTML == "Add Participant" ? "Cancel" : "Add Participant";
+            add_participant_button.value = add_participant_button.value == "Add Participant" ? "Cancel" : "Add Participant";
         });
         let edit_participant_buttons = document.getElementsByName("show-edit-participant-div-button");
         for (const edit_participant_button of edit_participant_buttons){

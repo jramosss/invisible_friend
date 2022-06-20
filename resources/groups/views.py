@@ -1,9 +1,8 @@
 from flask import Blueprint, abort, redirect, render_template, request, url_for
 from resources.groups.utils import send_group_mails
-from src.person import Person
 from src.tuples import make_bijections
 
-from .models import Group, Profile, db
+from .models import Group, Profile, db, Person
 
 groups = Blueprint(
     'groups', __name__,
