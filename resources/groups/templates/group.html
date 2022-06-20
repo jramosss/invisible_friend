@@ -1,13 +1,28 @@
 <!doctype html>
-<title>{% block title %}{% endblock %}</title>
+<title>{{group.name}}'s Group</title>
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/group.css') }}">
+<title>{{group.name}}'s Group</title>
 <nav>
   <h1 class="main-title">{{group.name}}'s Group</h1>
 </nav>
+<div class="return-div">
+  <input id="return-button" type="image" src="/static/images/back.png" href="/groups"/>
+</div>
+<div class="show-add-participant-div">
+  <input type="image" id="show-add-participant-button" src="/static/images/plus-sign.png"/>
+</div>
+<div class="delete-group-div">
+  <form action="/groups/delete/{{group.id}}" method="post">
+    <input id="delete-group-button" type="image" src="/static/images/trash.png"/>
+  </form>
+</div>
+<div class="ready-div">
+  <form action="/groups/send_mails/{{group.id}}" method="post">
+    <input id="ready-button" type="image" src="/static/images/mail-send.png"/>
+  </form>
+</div>
+<hr/>
 <section class="content">
-  <header>
-    {% block header %}{% endblock %}
-  </header>
   {% block content %}
   <div>
     <ul>
@@ -36,7 +51,6 @@
     </ul>
   </div>
   <div id="main-div" class="main-div">
-      <button id="show-add-participant-div-button" value="Add Participant">Add Participant</button>
       <div id="add-participant-div" style="display: none;">
           <form action="/groups/{{group.id}}" method="post">
             <label for="name">Name</label>
@@ -46,21 +60,8 @@
             <input type="submit" value="Add to group">
           </form>
       </div>
-      <div id="delete-group-div">
-        <form action="/groups/delete/{{group.id}}" method="post">
-          <button name="delete-group-btn" type="submit">Delete Group</button>
-        </form>
-      </div>
-      <div id="ready-div">
-        <form action="/groups/send_mails/{{group.id}}" method="post">
-          <button name="ready-group-btn" type="submit">Send Mails</button>
-        </form>
-      </div>
-      <div id="return">
-        <a href="/groups">Back to Groups</a>
-      </div>
       <script>
-        let add_participant_button = document.getElementById("show-add-participant-div-button");
+        let add_participant_button = document.getElementById("show-add-participant-button");
         add_participant_button.addEventListener("click", function() {
             let div = document.getElementById("add-participant-div");
             div.style.display = div.style.display != "block" ? "block" : "none";
