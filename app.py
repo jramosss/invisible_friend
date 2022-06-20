@@ -18,6 +18,7 @@ def create_app():
         'MAIL_PASSWORD': getenv("MAIL_PASSWORD"),
         'MAIL_USE_TLS': True,
         'MAIL_USE_SSL': False,
+        'TEMPLATES_AUTO_RELOAD': True,
     })
     from resources.groups.models import db
 
@@ -37,5 +38,9 @@ def create_app():
             from resources.groups.views import groups
             current_app.register_blueprint(groups, template_folder="templates/")
         register_blueprints()
+
+    @app.route("/")
+    def index():
+        return {"URL's": [rule.endpoint for rule in app.url_map.iter_rules()]}
 
     return app

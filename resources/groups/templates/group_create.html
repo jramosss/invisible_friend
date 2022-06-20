@@ -1,18 +1,19 @@
 <!doctype html>
-<title>{% block title %}{% endblock %}</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
-  <h1>Create Group</h1>
-</nav>
-<section class="content">
-  <header>
-    {% block header %}{% endblock %}
-  </header>
-  {% block content %}
-    <form method="post">
-      <label for="name">Group Name</label>
-      <input name="name" id="name" required>
-      <input type="submit" value="Create">
-    </form>
-  {% endblock %}
-</section>
+<html>
+  <head>
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/group-create.css') }}">
+    </head>
+    <title>Create Group</title>
+    <body>
+      <div class="main-title-div">
+        <h1 class="main-title">Create Group</h1>
+      </div>
+      <div class="body-div">
+        <form method="post">
+          <label for="name"/>
+          <input name="name" id="name" required class="group-name-input" placeholder="Awesome group name">
+          <input type="submit" value="Create">
+        </form>
+    </div>
+  </body>
+</html>

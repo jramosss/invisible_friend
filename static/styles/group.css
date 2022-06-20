@@ -1,0 +1,137 @@
+/* 
+    Top left corner:
+        Return arrow
+    Top right corner:
+        Add + sign to add participant
+    On every participant card:
+        Add trash icon to remove a participant
+        Add pencil icon to edit a participant
+    
+    Animations on add participant, remove participant, edit participant
+    BR line
+*/
+
+hr {
+    color: blue;
+    border: 1px solid blue;
+}
+
+nav {
+    margin-left: 10vh;
+    margin-top: 3vh;
+}
+
+.show-add-participant-div {
+    width: 3vh;
+    height: 3vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 3vh;
+    margin-right: 3vh;
+}
+
+#show-add-participant-button {
+    max-width: 100%; 
+    height: auto;
+    alt: "Add Participant";
+}
+
+input[type="image"]#show-add-participant-button:hover {
+    max-width: 110%;
+}
+
+.delete-group-div {
+    width: 3vh;
+    height: 3vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 3vh;
+    margin-right: 8vh;
+}
+
+#delete-group-button {
+    max-width: 100%; 
+    height: auto;
+    alt: "Delete Group";
+}
+
+input[type="image"]#delete-group-button:hover {
+    max-width: 110%;
+}
+
+.ready-div {
+    width: 3vh;
+    height: 3vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 3vh;
+    margin-right: 13vh;
+}
+
+#ready-button {
+    max-width: 100%; 
+    height: auto;
+    alt: "Send mail to participants";
+}
+
+input[type="image"]#ready-button:hover {
+    max-width: 110%;
+}
+
+.return-div {
+    width: 3vh;
+    height: 3vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 3vh;
+    margin-left: 3vh;
+}
+
+#return-button {
+    max-width: 100%; 
+    height: auto;
+    alt: "Return to group list";
+}
+
+.participant-div {
+    display: flex;
+    width: 100%;
+    height: 10vh;
+    align-items: center;
+}
+
+
+.remove-participant-div {
+    width: 17px;
+    height: 17px;
+    margin-left: 3px;
+}
+
+#remove-participant-button {
+    max-width: 100%; 
+    alt: "Remove Participant";
+}
+
+input[type="image"]#remove-participant-button:hover {
+    max-width: 110%;
+    /* TODO change image to open trash can on hover */
+}
+
+.edit-participant-div {
+    width: 17px;
+    height: 17px;
+    margin-left: 3px;
+}
+
+#show-edit-participant-button {
+    max-width: 100%; 
+    alt: "Edit Participant";
+}
+
+input[type="image"]#show-edit-participant-button:hover {
+    max-width: 110%;
+}

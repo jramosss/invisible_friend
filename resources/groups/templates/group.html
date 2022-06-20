@@ -1,82 +1,67 @@
 <!doctype html>
-<title>{% block title %}{% endblock %}</title>
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/group.css') }}">
+<title>{{group.name}}'s Group</title>
+<link rel= "stylesheet" href= "{{ url_for('static',filename='styles/group.css') }}">
+<title>{{group.name}}'s Group</title>
 <nav>
-  <h1 class="main-title">{{group.name}}'s Group</h1>
+  <h1>{{group.name}}'s Group</h1>
 </nav>
+<div class="return-div">
+  <a href="/groups">
+    <input id="return-button" type="image" src="/static/images/back.png"/>
+  </a>
+</div>
+<div class="show-add-participant-div">
+  <input type="image" id="show-add-participant-button" src="/static/images/plus-sign.png"/>
+</div>
+<div class="delete-group-div")">
+  <form action="/groups/delete/{{group.id}}" method="post">
+    <input id="delete-group-button" type="image" src="/static/images/trash.png"/>
+  </form>
+</div>
+<div class="ready-div">
+  <form action="/groups/send_mails/{{group.id}}" method="post">
+    <input id="ready-button" type="image" src="/static/images/mail-send.png"/>
+  </form>
+</div>
+<hr/>
 <section class="content">
-  <header>
-    {% block header %}{% endblock %}
-  </header>
   {% block content %}
-  <div>
-    <ul>
-      {% for member in group.members %}
-        <li>
-            <p>{{member.person.name}} - {{member.person.email}}</p>
-            <div id="remove-participant-div" class="remove-participant-div">
-              <form action="/groups/remove_participant/{{member.id}}" method="post">
-                <button name="remove-member-btn" type="submit">Remove Participant</button>
-              </form>
-            </div>
-            <div>
-              <button id={{member.person.name}} name="show-edit-participant-div-button" value="Add Participant">Edit Participant</button>
-              <div id={{member.person.name}} name="edit-participant-div" style="display: none;">
-                <form action="/groups/edit_participant/{{group.id}}" method="post">
-                  <label for="name">Name</label>
-                  <input name="new_user_name" id="name" required>
-                  <label for="email">Email</label>
-                  <input name="new_user_email" id="email" required>
-                  <input type="submit" value="Edit participant">
-                </form>
-              </div>
-            </div>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div id="main-div" class="main-div">
-      <button id="show-add-participant-div-button" value="Add Participant">Add Participant</button>
-      <div id="add-participant-div" style="display: none;">
-          <form action="/groups/{{group.id}}" method="post">
-            <label for="name">Name</label>
-            <input name="user_name" id="name" required>
-            <label for="email">Email</label>
-            <input name="user_email" id="email" required>
-            <input type="submit" value="Add to group">
+  <ul>
+    {% for member in group.members %}
+    <li>
+      <div class="participant-div">
+        <div class="participant-info-div">
+          <p style="font-size: 3vh;">{{member.person.name}} - {{member.person.email}}</p>
+        </div>
+        <div class="remove-participant-div">
+          <form action="/groups/remove_participant/{{member.id}}" method="post">
+            <input id="remove-participant-button" type="image" src="/static/images/trash.png"/>
           </form>
-      </div>
-      <div id="delete-group-div">
-        <form action="/groups/delete/{{group.id}}" method="post">
-          <button name="delete-group-btn" type="submit">Delete Group</button>
-        </form>
-      </div>
-      <div id="ready-div">
-        <form action="/groups/send_mails/{{group.id}}" method="post">
-          <button name="ready-group-btn" type="submit">Send Mails</button>
-        </form>
-      </div>
-      <div id="return">
-        <a href="/groups">Back to Groups</a>
-      </div>
-      <script>
-        let add_participant_button = document.getElementById("show-add-participant-div-button");
-        add_participant_button.addEventListener("click", function() {
-            let div = document.getElementById("add-participant-div");
-            div.style.display = div.style.display != "block" ? "block" : "none";
-            add_participant_button.value = button.value == "Add Participant" ? "Cancel" : "Add Participant";
-            add_participant_button.innerHTML = button.innerHTML == "Add Participant" ? "Cancel" : "Add Participant";
-        });
-        let edit_participant_buttons = document.getElementsByName("show-edit-participant-div-button");
-        for (const edit_participant_button of edit_participant_buttons){
-          edit_participant_button.addEventListener("click", function() {
-              let div = edit_participant_button.parentElement.children[1];
-              div.style.display = div.style.display != "block" ? "block" : "none";
-              edit_participant_button.value = edit_participant_button.value == "Edit Participant" ? "Cancel" : "Edit Participant";
-              edit_participant_button.innerHTML = edit_participant_button.innerHTML == "Edit Participant" ? "Cancel" : "Edit Participant";
-          });
-        }
-      </script>
+        </div>
+        <div class="edit-participant-div">
+          <input id="show-edit-participant-button" name="show-edit-participant-button" type="image" src="/static/images/pencil.png"/>
+          <div id={{member.person.name}} name="edit-participant-div" style="display: none;">
+            <form action="/groups/edit_participant/{{group.id}}" method="post">
+              <label for="name">Name</label>
+              <input name="new_user_name" id="name" required>
+              <label for="email">Email</label>
+              <input name="new_user_email" id="email" required>
+              <input type="submit" value="Edit participant">
+            </form>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+  <div id="add-participant-div" style="display: none;">
+      <form action="/groups/{{group.id}}" method="post">
+        <label for="name">Name</label>
+        <input name="user_name" id="name" required>
+        <label for="email">Email</label>
+        <input name="user_email" id="email" required>
+        <input type="submit" value="Add to group">
+      </form>
   </div>
+  <script src="{{ url_for('static',filename='functions/group.js') }}"></script>
   {% endblock %}
 </section>
