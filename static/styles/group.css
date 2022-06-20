@@ -37,6 +37,10 @@ nav {
     alt: "Add Participant";
 }
 
+input[type="image"]#show-add-participant-button:hover {
+    max-width: 110%;
+}
+
 .delete-group-div {
     width: 3vh;
     height: 3vh;
@@ -53,6 +57,10 @@ nav {
     alt: "Delete Group";
 }
 
+input[type="image"]#delete-group-button:hover {
+    max-width: 110%;
+}
+
 .ready-div {
     width: 3vh;
     height: 3vh;
@@ -67,6 +75,10 @@ nav {
     max-width: 100%; 
     height: auto;
     alt: "Send mail to participants";
+}
+
+input[type="image"]#ready-button:hover {
+    max-width: 110%;
 }
 
 .return-div {
@@ -92,10 +104,6 @@ nav {
     align-items: center;
 }
 
-.participant-info-div {
-    float: left;
-}
-
 
 .remove-participant-div {
     width: 17px;
@@ -110,6 +118,7 @@ nav {
 
 input[type="image"]#remove-participant-button:hover {
     max-width: 110%;
+    /* TODO change image to open trash can on hover */
 }
 
 .edit-participant-div {
